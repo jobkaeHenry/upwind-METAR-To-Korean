@@ -17,7 +17,6 @@ export const MainPage = () => {
 
   useEffect(() => {
     const API_KEY = process.env.REACT_APP_API_KEY;
-    
     axios
       .get(
         `http://apis.data.go.kr/1360000/AmmService/getMetar?servicekey=${API_KEY}&icao=${ICAO}&dataType=JSON`
