@@ -5,11 +5,8 @@ import body from "../img/direction_compass_body(rotate).png";
 
 export const CompassContainer = styled.div`
   width: 100%;
-  height: 100%;
   max-width: 500px;
-  max-height: 500px;
-  min-width: 200px;
-  min-height: 200px;
+  min-width: 160px;
   background-color: ${(props)=>props.bgcolor || "none"};
   overflow: hidden;
   display: flex;
