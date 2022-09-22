@@ -3,13 +3,19 @@ import { parseMetar } from "metar-taf-parser";
 import React, { useEffect, useState } from "react";
 import { WindDirectionCompass } from "../components/windDirectionCompass";
 import { WindSpeedCompass } from "../components/windSpeedCompass";
-import { GradientWrapper } from "../components/wrapper/MainPageWrapper";
+import {
+  ColumnWrapper,
+  GradientWrapper,
+  RowWrapper,
+} from "../components/wrapper/MainPageWrapper";
 import { GhostButton } from "./../components/button";
+import { GradientText } from "./../components/text";
 
 export const MainPage = () => {
   const defaultMetar = parseMetar(
-    "RKSI 210700Z VRB05KTKT 10SM CAVOK 23/11 Q1016 NOSIG="
+    "RKSI 210700Z VRB05KTKT 10SM SCT300 FEW500 6000 4000E 23/11 Q1016 NOSIG="
   );
+  console.log(defaultMetar);
 
   const [rawMetar, setRawMetar] = useState("");
   const [parsedMetar, setParsedMetar] = useState(defaultMetar);
@@ -34,8 +40,13 @@ export const MainPage = () => {
   }, [ICAO]);
 
   const windDataToKor = (parsedMetar) => {
-    console.log(parsedMetar)
-    let result = ` 현재 바람은 ${(parsedMetar.wind.degrees?parsedMetar.wind.degrees+"°":"변동으로 인해 측정이 불가능한")} 방향에서 ${parsedMetar.wind.speed}${parsedMetar.wind.unit}의 세기로 불고 있으`;
+    let result = ` 현재 바람은 ${
+      parsedMetar.wind.degrees
+        ? parsedMetar.wind.degrees + "°"
+        : "평균풍향 측정이 불가한"
+    } 방향에서 ${parsedMetar.wind.speed}${
+      parsedMetar.wind.unit
+    }의 세기로 불고 있으`;
     if (
       parsedMetar.wind.minVariation ||
       parsedMetar.wind.maxVariation ||
@@ -50,45 +61,83 @@ export const MainPage = () => {
         result += ` ${parsedMetar.wind.minVariation}°~${parsedMetar.wind.maxVariation}° 사이의 변동을 가진 바람이 관측되니`;
       }
       result += " 주의가 필요합니다.";
-    }else {result+="며, "}
-    return result
+    } else {
+      result += "며, ";
+    }
+    return result;
   };
 
-  const visibilityToKor =(parsedMetar)=>{
-    let result = "현재 활주로 시정은"
-      if(parsedMetar.cavok){
-        result+=" 10km 이상이며, 운항 상 장애요인이 없는 CAVOK 입니다. "
-      }else if(parsedMetar.visibility.value === 9999){
-        result+=" 10km 이상입니다. "
-      }else result+= `${parsedMetar.visibility.value}${parsedMetar.visibility.unit} 입니다. `
-    return result
-  }
+  const visibilityToKor = (parsedMetar) => {
+    const visibility = parsedMetar.visibility;
+    let result = "현재 우세시정은 ";
+    if (parsedMetar.cavok) {
+      result += " 10km 이상이며, 운항 상 장애요인이 없는 CAVOK ";
+    } else if (visibility.value === 9999) {
+      result += " 10km 이상";
+    } else result += `${visibility.value}${visibility.unit}`;
+    if (visibility.min) {
+      result += `이며, 최소 시정은 ${
+        visibility.min.direction ? `${visibility.min.direction}방향에서 ` : ""
+      } ${visibility.min.value}m `;
+    }
+    result += "입니다. ";
+    return result;
+  };
+  const cloudToKor = (parsedMetar) => {
+    const cloud = parsedMetar.clouds;
+    let result = "";
+    if (cloud.length > 0) {
+      result += "현재 구름은 ";
+      for (let i = 0; i < cloud.length; i++) {
+        result += `${cloud[i].height}ft 높이에 ${cloud[i].quantity}구름`;
+        if (i === cloud.length - 1) {
+          result += "이 관측됩니다.";
+        } else result += ", ";
+      }
+    } else if (parsedMetar.cavok || cloud.length === 0) {
+      return;
+    }
+    return result;
+  };
 
   return (
     <>
       <GradientWrapper>
-        <p>{`ICAO : ${ICAO} Airport : ${airportName}`}</p>
-        <WindDirectionCompass degree={parsedMetar.wind.degrees} />
-        <WindSpeedCompass
-          speed={parsedMetar.wind.speed}
-          gust={parsedMetar.wind.gust}
-        />
+        <ColumnWrapper>
+          <ColumnWrapper>
+            <span className="white">{ICAO}</span>
+            <GradientText size={"3rem"} className={"xbold"}>{airportName}</GradientText>
+          </ColumnWrapper>
+          <RowWrapper>
+            <WindDirectionCompass degree={parsedMetar.wind.degrees} />
+            <WindSpeedCompass
+              speed={parsedMetar.wind.speed}
+              gust={parsedMetar.wind.gust}
+            />
+          </RowWrapper>
+        </ColumnWrapper>
       </GradientWrapper>
-      <div>
-        <p>{`메타 전문: ${rawMetar}`}</p>
-        <GhostButton>{parsedMetar.wind.degrees}</GhostButton>
+
+      <ColumnWrapper>
+        <p>{rawMetar}</p>
+        <div>
+          <GhostButton className="bold">{parsedMetar.wind.degrees}</GhostButton>
+          <GhostButton className="bold">{parsedMetar.wind.degrees}</GhostButton>
+        </div>
         <p>
-          {airportName} ({ICAO}) 에서 국제 표준시(UTC) {parsedMetar.day}일 {parsedMetar.hour}
-          시 {parsedMetar.minute === 0 ? "00" : parsedMetar.minute}분에 발행된
-          METAR 입니다. 
-          {windDataToKor(defaultMetar)}
+          {airportName} ({ICAO}) 에서 국제 표준시(UTC) {parsedMetar.day}일{" "}
+          {parsedMetar.hour}시{" "}
+          {parsedMetar.minute === 0 ? "00" : parsedMetar.minute}분에 발행된
+          METAR 입니다.
+          {windDataToKor(parsedMetar)}
           {visibilityToKor(defaultMetar)}
-          <br/>
-          현재기온은 {parsedMetar.temperature}℃,
-          노점온도는 {parsedMetar.dewPoint}℃ 입니다
-          고도계 수정치는 {parsedMetar.altimeter} 입니다
+          {cloudToKor(parsedMetar)}
+          현재기온은 {parsedMetar.temperature}℃, 노점온도는{" "}
+          {parsedMetar.dewPoint}℃ 입니다 고도계 수정치는 {parsedMetar.altimeter}
+          {"hPa "}
+          입니다
         </p>
-      </div>
+      </ColumnWrapper>
     </>
   );
 };

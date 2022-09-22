@@ -17,11 +17,25 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template = (args) => <WindSpeedCompass {...args} />;
 
+
 export const Default = Template.bind({});
+export const Gust = Template.bind({});
+export const Dangerous = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
   degree: 120,
   speed:11,
+  bgcolor:"dimgray"
+};
+Gust.args = {
+  degree: 120,
+  speed:11,
   gust:5,
+  bgcolor:"dimgray"
+};
+Dangerous.args = {
+  degree: 120,
+  speed:35,
+  gust:15,
   bgcolor:"dimgray"
 };

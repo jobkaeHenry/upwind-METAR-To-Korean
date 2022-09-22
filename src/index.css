@@ -1,3 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nanum Gothic', sans-serif;
+  color: var(--font-black);
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: 0;
+  word-break: keep-all;
+}
+/* 브랜드컬러 */
+:root{
+  --font-black: #333333;
+  --font-gray: #737373;
+  --font-light-gray : #a5a5a5;
+
+  --background-gray : #f8f8f8;
+  --background-white : #FFFFFF;
+  --alert-red: #F62215;
+  --line-gray: #f2f2f2;
+}
+/* 컬러시스템 */
+.fontgray {
+  color: var(--font-gray)
+}
+.font_deep_brown {
+  color: var(--main-deep-brown);
+}
+.font_light_gray,::placeholder{
+  color: var(--font-light-gray);
+}
+.white {
+  color: var(--background-white);
+}
+
+.bold {
+  font-weight: 700;
+}
+.xbold{
+  font-weight: 800;
+}
+
+.h5 {
+  font-size: 0.8rem;
+}
+.h4 {
+  font-size: 1.2rem;
+}
+.h3 {
+  font-size: 1.4rem;
+}
+.h2 {
+  font-size: 1.6rem;
+}
+.h1 {
+  font-size: 1.8rem;
+}
+.mt-5{
+  margin-top: 5px;
+}
+.mt-10{
+  margin-top: 10px;
+}
+
+.mr-5{
+  margin-right: 5px;
+}
+.mr-10{
+  margin-right: 10px;
+}
 body {
   margin: 0;
   padding:0;
@@ -11,4 +85,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@media screen and(max-width:425px) {
+  *{
+    letter-spacing: 1px;
+  }
 }

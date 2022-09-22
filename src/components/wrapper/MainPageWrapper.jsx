@@ -8,10 +8,15 @@ export const GradientWrapper=styled.main`
   width: 100%;
   padding : 16px;
   display: flex;
-
 `
-export const MainPageWrapper = () => {
-  return (
-    <main></main>
-  )
-}
+
+export const ColumnWrapper=styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`
+export const RowWrapper=styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: Row;
+`
