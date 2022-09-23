@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import niddle from "../img/direction_compass_niddle.png";
-import body from "../img/direction_compass_body(rotate).png";
+import niddle from "../../img/direction_compass_niddle.png";
+import body from "../../img/direction_compass_body(rotate).png";
 
 export const CompassContainer = styled.div`
   width: 100%;

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import niddleGreen from "../img/windspeed_compass_niddle(green).png";
-import niddleAmber from "../img/windspeed_compass_niddle(amber).png";
-import niddleRed from "../img/windspeed_compass_niddle(red).png";
-import body from "../img/windspeed_compass_body.png";
+import niddleGreen from "../../img/windspeed_compass_niddle(green).png";
+import niddleAmber from "../../img/windspeed_compass_niddle(amber).png";
+import niddleRed from "../../img/windspeed_compass_niddle(red).png";
+import body from "../../img/windspeed_compass_body.png";
 import { CompassContainer } from "./windDirectionCompass";
 import { CompassBody } from "./windDirectionCompass";
 
@@ -42,7 +42,7 @@ const CompassNiddle = styled.img`
 export const WindSpeedCompass = ({ speed, gust, bgcolor }) => {
   return (
     <CompassContainer bgcolor={bgcolor}>
-      <CompassNiddle className={gust?"vibrate":null} src={colorCalc(speed, gust)} degree={speed * 3.6}/>
+      <CompassNiddle className={gust||speed>=55?"vibrate":null} src={colorCalc(speed, gust)} degree={speed<=55?speed * 3.6:55*3.6}/>
       <CompassBody src={body}></CompassBody>
     </CompassContainer>
   );

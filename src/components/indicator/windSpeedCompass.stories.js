@@ -4,7 +4,7 @@ import { WindSpeedCompass } from './windSpeedCompass';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Compass/wind-speed-compass',
+  title: 'Indicator Component/compass/wind-speed-compass',
   component: WindSpeedCompass,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
@@ -23,18 +23,17 @@ export const Gust = Template.bind({});
 export const Dangerous = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
-  degree: 120,
   speed:11,
   bgcolor:"dimgray"
 };
 Gust.args = {
-  degree: 120,
+
   speed:11,
   gust:5,
   bgcolor:"dimgray"
 };
 Dangerous.args = {
-  degree: 120,
+
   speed:35,
   gust:15,
   bgcolor:"dimgray"

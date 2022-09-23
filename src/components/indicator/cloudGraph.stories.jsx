@@ -1,24 +1,22 @@
 import React from 'react';
 
-import { WindDirectionCompass } from './windDirectionCompass';
+import { CloudGraph } from './cloudGraph';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Compass/wind-direction-compass',
-  component: WindDirectionCompass,
+  title: 'indicator component/graph/cloudsGraph',
+  component: CloudGraph,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    degree: { control: 'number' },
-    bgcolor:{control : "color"}
+    backgroundColor: { control: 'color' },
   },
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <WindDirectionCompass {...args} />;
+const Template = (args) => <CloudGraph {...args} />;
 
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
-  degree: 120,
-  bgcolor:"dimgray"
+  primary: true,
 };

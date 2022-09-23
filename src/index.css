@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap");
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
   color: var(--font-black);
   font-size: 1rem;
   font-weight: 400;
@@ -13,24 +13,25 @@
   word-break: keep-all;
 }
 /* 브랜드컬러 */
-:root{
+:root {
   --font-black: #333333;
   --font-gray: #737373;
-  --font-light-gray : #a5a5a5;
+  --font-light-gray: #a5a5a5;
 
-  --background-gray : #f8f8f8;
-  --background-white : #FFFFFF;
-  --alert-red: #F62215;
+  --background-gray: #f8f8f8;
+  --background-white: #ffffff;
+  --alert-red: #f62215;
   --line-gray: #f2f2f2;
 }
 /* 컬러시스템 */
 .fontgray {
-  color: var(--font-gray)
+  color: var(--font-gray);
 }
 .font_deep_brown {
   color: var(--main-deep-brown);
 }
-.font_light_gray,::placeholder{
+.font_light_gray,
+::placeholder {
   color: var(--font-light-gray);
 }
 .white {
@@ -40,7 +41,7 @@
 .bold {
   font-weight: 700;
 }
-.xbold{
+.xbold {
   font-weight: 800;
 }
 
@@ -59,36 +60,28 @@
 .h1 {
   font-size: 1.8rem;
 }
-.mt-5{
+.mt-5 {
   margin-top: 5px;
 }
-.mt-10{
+.mt-10 {
   margin-top: 10px;
 }
 
-.mr-5{
+.mr-5 {
   margin-right: 5px;
 }
-.mr-10{
+.mr-10 {
   margin-right: 10px;
 }
 body {
   margin: 0;
-  padding:0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 @media screen and(max-width:425px) {
-  *{
+  body {
     letter-spacing: 1px;
   }
 }
