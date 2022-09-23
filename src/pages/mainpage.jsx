@@ -1,8 +1,8 @@
 import axios from "axios";
 import { parseMetar } from "metar-taf-parser";
 import React, { useEffect, useState } from "react";
-import { WindDirectionCompass } from "../components/windDirectionCompass";
-import { WindSpeedCompass } from "../components/windSpeedCompass";
+import { WindDirectionCompass } from "../components/indicator/windDirectionCompass";
+import { WindSpeedCompass } from "../components/indicator/windSpeedCompass";
 import {
   ColumnWrapper,
   GradientWrapper,
@@ -13,7 +13,7 @@ import { GradientText } from "./../components/text";
 
 export const MainPage = () => {
   const defaultMetar = parseMetar(
-    "RKSI 210700Z VRB05KTKT 10SM SCT300 FEW500 6000 4000E 23/11 Q1016 NOSIG="
+    "RKSG 230656Z AUTO 30014KT 10SM -RASN FG HZ 19/09 A2991 RMK AO2 SLP131 T01940093 $"
   );
   console.log(defaultMetar);
 
@@ -66,7 +66,6 @@ export const MainPage = () => {
     }
     return result;
   };
-
   const visibilityToKor = (parsedMetar) => {
     const visibility = parsedMetar.visibility;
     let result = "현재 우세시정은 ";
@@ -130,7 +129,7 @@ export const MainPage = () => {
           {parsedMetar.minute === 0 ? "00" : parsedMetar.minute}분에 발행된
           METAR 입니다.
           {windDataToKor(parsedMetar)}
-          {visibilityToKor(defaultMetar)}
+          {visibilityToKor(parsedMetar)}
           {cloudToKor(parsedMetar)}
           현재기온은 {parsedMetar.temperature}℃, 노점온도는{" "}
           {parsedMetar.dewPoint}℃ 입니다 고도계 수정치는 {parsedMetar.altimeter}
