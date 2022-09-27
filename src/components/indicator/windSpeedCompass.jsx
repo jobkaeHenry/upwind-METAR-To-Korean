@@ -31,9 +31,6 @@ const CompassNiddle = styled.img`
     50%{
       transform: rotate(${(props) => props.degree-1 || "0"}deg);
     }
-    100%{
-      transform: rotate(${(props) => props.degree+1 || "0"}deg);
-    }
   }
   animation: gustAnim 300ms infinite;
   }
@@ -42,7 +39,7 @@ const CompassNiddle = styled.img`
 export const WindSpeedCompass = ({ speed, gust, bgcolor }) => {
   return (
     <CompassContainer bgcolor={bgcolor}>
-      <CompassNiddle className={gust||speed>=55?"vibrate":null} src={colorCalc(speed, gust)} degree={speed<=55?speed * 3.6:55*3.6}/>
+      <CompassNiddle className={gust||speed>=55?"vibrate":null} src={colorCalc(speed, gust)} degree={speed<=55?speed*3.6 : 55*3.6}/>
       <CompassBody src={body}></CompassBody>
     </CompassContainer>
   );

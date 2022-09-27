@@ -1,4 +1,5 @@
 import React from 'react';
+import "../../../src/index"
 
 import { CloudGraph } from './cloudGraph';
 
@@ -8,7 +9,8 @@ export default {
   component: CloudGraph,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    backgroundColor: { control: 'color' },
+    bgcolor: { control: 'color' },
+    metarCloud : {control: 'null' }
   },
 };
 
@@ -18,5 +20,6 @@ const Template = (args) => <CloudGraph {...args} />;
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
-  primary: true,
+  bgcolor: "dimgray",
+  metarCloud : [{quantity: 'FEW', height: 1800, type: undefined},{quantity: 'SCT', height: 3000, type: undefined},{quantity: 'BKN', height: 9500, type: undefined}]
 };
