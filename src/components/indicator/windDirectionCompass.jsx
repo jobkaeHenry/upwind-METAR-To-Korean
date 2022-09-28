@@ -7,29 +7,48 @@ export const CompassContainer = styled.div`
   width: 100%;
   max-width: 400px;
   min-width: 160px;
-  background-color: ${(props)=>props.bgcolor || "none"};
+  background-color: ${(props) => props.bgcolor || "none"};
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   margin: 16px;
+  opacity: 0.5;
+
+&:hover{
+  opacity: 1;
+}
 `;
 const CompassNiddle = styled.img`
   width: 100%;
   position: absolute;
-  transform: rotate(${(props)=>props.degree+180 || "0"}deg);
+  transform: rotate(${(props) => props.degree || "0"}deg);
   z-index: 4;
-  transition-duration: 300ms;
+  
+  
+  
+  &.variable {
+    @keyframes variableAnim {
+      0% {
+        transform: rotate(${(props) => props.degree + 1 || "0"}deg);
+      }
+      50% {
+        transform: rotate(${(props) => props.degree - 1 || "0"}deg);
+      }
+    }
+    animation: variableAnim 300ms infinite;
+  }
+
 `;
 export const CompassBody = styled.img`
   width: 100%;
 `;
 
-export const WindDirectionCompass = ({degree, bgcolor}) => {
+export const WindDirectionCompass = ({ degree, variable, bgcolor }) => {
   return (
     <CompassContainer bgcolor={bgcolor}>
-      <CompassNiddle src={niddle} degree={degree}/>
+      <CompassNiddle className={variable?"variable":null} src={niddle} degree={degree+180} />
       <CompassBody src={body}></CompassBody>
     </CompassContainer>
   );

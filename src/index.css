@@ -13,6 +13,10 @@
   letter-spacing: 0;
   word-break: keep-all;
   object-fit: contain;
+  transition-duration: 300ms;
+}
+img{
+  display: block;
 }
 /* 브랜드컬러 */
 :root {

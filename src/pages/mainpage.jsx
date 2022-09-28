@@ -14,11 +14,20 @@ import { GradientText } from "./../components/text";
 import {CloudGraph} from './../components/indicator/cloudGraph';
 
 export const MainPage = () => {
+
+  //개발용
   const defaultMetar = parseMetar(
-    "RKSG 230656Z AUTO 30014KT FEW018 SCT030CB BKN095 10SM -RASN FG HZ 19/09 A2991 RMK AO2 SLP131 T01940093 $"
+    "RKSI 280830Z 27006KT 8000 NSC 22/18 Q1013 NOSIG="
   );
+
+  // 배포용
+  // const defaultMetar = parseMetar(
+  //   "RKSG 230656Z AUTO 00000KT -RASN FG HZ 19/09 A2991 RMK AO2 SLP131 T01940093 $"
+  // );
+
   console.log(defaultMetar);
 
+  const API_KEY = process.env.REACT_APP_API_KEY;
   const [rawMetar, setRawMetar] = useState("");
   const [parsedMetar, setParsedMetar] = useState(defaultMetar);
   const [ICAO, setICAO] = useState("RKPU");
@@ -26,31 +35,36 @@ export const MainPage = () => {
   // console.log(parsedMetar);
 
   useEffect(() => {
-    const API_KEY = process.env.REACT_APP_API_KEY;
+    
     axios
       .get(
         `http://apis.data.go.kr/1360000/AmmService/getMetar?servicekey=${API_KEY}&icao=${ICAO}&dataType=JSON`
       )
       .then((res) => {
         const response = res.data.response.body.items.item[0];
+        console.log(response)
         setAirportName(response.airportName);
         setRawMetar(response.metarMsg.replace(`METAR `, ""));
-        setParsedMetar(parseMetar(response.metarMsg.replace(`METAR `, "")));
+        setParsedMetar(parseMetar(response.metarMsg.replace(`METAR `, "").replace("NCD","NSC")));
         setICAO(response.icaoCode);
       }).catch((err)=>{console.log(err)});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ICAO]);
 
   return (
     <>
       <GradientWrapper>
+{/* 공항이름 */}
         <ColumnWrapper>
           <ColumnWrapper>
             <span className="white bold">{ICAO}</span>
-            <GradientText size={"3rem"} className={"xbold"}>{airportName}</GradientText>
+            <GradientText size={"3rem"} className={"bold"}>{airportName}</GradientText>
           </ColumnWrapper>
           <RowWrapper>
+{/* 구름그래프 */}
             <CloudGraph metarCloud={parsedMetar.clouds}/>
-            <WindDirectionCompass degree={parsedMetar.wind.degrees} />
+{/* 콤파스 */}
+            <WindDirectionCompass degree={parsedMetar.wind.degrees} variable={parsedMetar.wind.minVariation} />
             <WindSpeedCompass
               speed={parsedMetar.wind.speed}
               gust={parsedMetar.wind.gust}

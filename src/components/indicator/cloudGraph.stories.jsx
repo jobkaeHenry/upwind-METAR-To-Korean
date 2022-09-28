@@ -10,7 +10,7 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     bgcolor: { control: 'color' },
-    metarCloud : {control: 'null' }
+    metarCloud : {control: 'json' }
   },
 };
 

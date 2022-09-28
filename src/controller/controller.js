@@ -45,10 +45,10 @@ export const visibilityToKor = (parsedMetar) => {
 export const cloudToKor = (parsedMetar) => {
   const cloud = parsedMetar.clouds;
   let result = "";
-  if (cloud.length > 0 && cloud[0].quantity!=="NSC") {
+  if (cloud.length !== 0 && cloud[0].quantity!=="NSC") {
     result += "현재 구름은 ";
     for (let i = 0; i < cloud.length; i++) {
-      result += `${cloud[i].height}ft 높이에 ${cloud[i].quantity}구름`;
+      result += `${numberComma(cloud[i].height)}ft 높이에 ${cloud[i].quantity}구름`;
       if (i === cloud.length - 1) {
         result += "이 관측됩니다.";
       } else result += ", ";
@@ -56,13 +56,16 @@ export const cloudToKor = (parsedMetar) => {
 
   } else if (parsedMetar.cavok || cloud.length === 0) {
     return;
-  }
+  }else{return}
   return result;
 };
 
-
+// 숫자 메서드
 export const randomNum =(min,max)=>{
   return Math.floor((Math.random()*(max-min))+min)
 }
 
+export const numberComma=(number)=>{
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 

@@ -1,33 +1,45 @@
 import React from "react";
 import styled from "styled-components";
 import { GhostButton } from "../button";
-import { randomNum } from './../../controller/controller';
+import { numberComma, randomNum } from "./../../controller/controller";
 
-import cloudImg01 from "../../img/cloud01.png"
-import cloudImg02 from "../../img/cloud02.png"
-import cloudImg03 from "../../img/cloud03.png"
-import cloudImg04 from "../../img/cloud04.png"
-import cloudImg05 from "../../img/cloud05.png"
+import cloudImg01 from "../../img/cloud01.png";
+import cloudImg02 from "../../img/cloud02.png";
+import cloudImg03 from "../../img/cloud03.png";
+import cloudImg04 from "../../img/cloud04.png";
+import cloudImg05 from "../../img/cloud05.png";
 
-
-const randomCloud =()=>{
-  const cloudsList = [cloudImg01,cloudImg02,cloudImg03,cloudImg04,cloudImg05]
-  console.log(cloudsList[randomNum(0,4)])
-  return cloudsList[randomNum(0,4)]
-}
+const randomCloud = () => {
+  const cloudsList = [
+    cloudImg01,
+    cloudImg02,
+    cloudImg03,
+    cloudImg04,
+    cloudImg05,
+  ];
+  return cloudsList[randomNum(0, 4)];
+};
 
 const CloudWrap = styled.div`
   width: 100%;
   min-width: 300px;
+  max-width: 50vw;
+  height: 100%;
   background-color: ${(props) => (props.bgcolor ? props.bgcolor : "none")};
   padding: 10px;
   display: flex;
+  opacity: 0.5;
+
+  &:hover{
+    opacity: 1;
+  }
 `;
 
 const CloudTable = styled.div`
   width: 100%;
   height: 100%;
-  min-height: 150px;
+  min-height: 300px;
+
   border-width: 0px 0px 1px 1px;
   border-style: solid;
   border-color: white;
@@ -40,7 +52,6 @@ const CloudTable = styled.div`
 `;
 
 const AltitudeLegned = styled.div`
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -54,16 +65,25 @@ const NoCloud = styled(GhostButton)`
   border-color: #fff;
 `;
 
-const CloudElem = styled.img`
+const CloudElemWrapper = styled.div`
   position: absolute;
-  bottom: ${(props)=>props.position}%;
-  width: 10%;
-`
+  bottom: ${(props) => props.position}%;
+  display:flex;
+  justify-content: space-around;
+`;
 
-const CloudGenaratorElem = ({ height, quantity }) => {
+const CloudElem = styled.img`
+  width: ${(props) => props.randomNum(12,20)}%;
+  object-position: bottom;
+  padding-bottom:${(props) => props.randomNum(0,10)}px;
+  padding-right:${(props) => -props.randomNum(0,12)}px;
+`;
 
-  let positionByHeight = height/100;
+const CloudRow = ({ height, quantity, maxHeight }) => {
+  let positionByHeight = height / (maxHeight / 91);
   let oktas;
+  let emptyArr = []
+  
   switch (quantity) {
     case "FEW":
       oktas = 2;
@@ -80,21 +100,34 @@ const CloudGenaratorElem = ({ height, quantity }) => {
     default:
       break;
   }
-  return <CloudElem position={positionByHeight} src={randomCloud()} />
+  for(let i=0;i<oktas;i++){
+    emptyArr.push("henry")
+  }
 
+  return (
+    <CloudElemWrapper position={positionByHeight}>
+      {emptyArr.map(()=>{return <CloudElem src={randomCloud()}randomNum={randomNum} />})}
+    </CloudElemWrapper>
+  );
 };
 
 export const CloudGraph = ({ metarCloud, bgcolor }) => {
+  const maxHeight = metarCloud[metarCloud.length - 1].height;
 
   const cloudsGenerator = () => {
-    if (metarCloud === undefined || metarCloud.length === 0) {
+    if (
+      metarCloud === undefined ||
+      metarCloud.length === 0 ||
+      metarCloud[0].quantity === ("NSC"||"NCD"||"SKC")
+    ) {
       return <NoCloud className="white">구름이 없습니다</NoCloud>;
     } else {
       return metarCloud.map((e) => {
         return (
-          <CloudGenaratorElem
+          <CloudRow
             height={e.height}
             quantity={e.quantity}
+            maxHeight={maxHeight}
           />
         );
       });
@@ -104,8 +137,12 @@ export const CloudGraph = ({ metarCloud, bgcolor }) => {
   return (
     <CloudWrap bgcolor={bgcolor}>
       <AltitudeLegned>
-        <LegendElem>10,000</LegendElem>
-        <LegendElem>5,000</LegendElem>
+        <LegendElem>
+          {metarCloud[0].quantity === "NSC" ? "10,000" :numberComma(maxHeight)}
+        </LegendElem>
+        <LegendElem>
+          {metarCloud[0].quantity === "NSC" ? "5,000" :numberComma( maxHeight / 2)}
+        </LegendElem>
         <LegendElem>0</LegendElem>
       </AltitudeLegned>
       <CloudTable>{cloudsGenerator(metarCloud)}</CloudTable>
