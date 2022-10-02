@@ -17,7 +17,7 @@ export const MainPage = () => {
 
   //개발용
   const defaultMetar = parseMetar(
-    "RKSI 280830Z 27006KT 8000 NSC 22/18 Q1013 NOSIG="
+    "RKSI 280830Z 27006KT 8000 FEW030 SCT120 OVC250 22/18 Q1013 NOSIG="
   );
 
   // 배포용
@@ -42,7 +42,7 @@ export const MainPage = () => {
       )
       .then((res) => {
         const response = res.data.response.body.items.item[0];
-        console.log(response)
+        // console.log(response)
         setAirportName(response.airportName);
         setRawMetar(response.metarMsg.replace(`METAR `, ""));
         setParsedMetar(parseMetar(response.metarMsg.replace(`METAR `, "").replace("NCD","NSC")));
