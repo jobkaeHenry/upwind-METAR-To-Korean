@@ -25,7 +25,7 @@ export const MainPage = () => {
   //   "RKSG 230656Z AUTO 00000KT -RASN FG HZ 19/09 A2991 RMK AO2 SLP131 T01940093 $"
   // );
 
-  console.log(defaultMetar);
+  // console.log(defaultMetar);
 
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [rawMetar, setRawMetar] = useState("");
@@ -38,7 +38,8 @@ export const MainPage = () => {
     
     axios
       .get(
-        `https://apis.data.go.kr/1360000/AmmService/getMetar?servicekey=${API_KEY}&icao=${ICAO}&dataType=JSON`
+        // `https://apis.data.go.kr/1360000/AmmService/getMetar?servicekey=${API_KEY}&icao=${ICAO}&dataType=JSON`
+        `https://apis.data.go.kr/1360000/AmmService/getMetar?servicekey=ePINzJyTp1MOBnHyj72pB6UQXe5gDuS7fisXu%2BlC0OxScS0V%2BXje7Dy2HbamRoEf1qvbtC7CPXIsOXOdb%2F%2BRLQ%3D%3D&icao=${ICAO}&dataType=JSON`
       )
       .then((res) => {
         const response = res.data.response.body.items.item[0];
