@@ -30,7 +30,7 @@ export const MainPage = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [rawMetar, setRawMetar] = useState("");
   const [parsedMetar, setParsedMetar] = useState(defaultMetar);
-  const [ICAO, setICAO] = useState("RKPU");
+  const [ICAO, setICAO] = useState("RKSI");
   const [airportName, setAirportName] = useState("");
   // console.log(parsedMetar);
 
@@ -38,7 +38,7 @@ export const MainPage = () => {
     
     axios
       .get(
-        `http://apis.data.go.kr/1360000/AmmService/getMetar?servicekey=${API_KEY}&icao=${ICAO}&dataType=JSON`
+        `https://apis.data.go.kr/1360000/AmmService/getMetar?servicekey=${API_KEY}&icao=${ICAO}&dataType=JSON`
       )
       .then((res) => {
         const response = res.data.response.body.items.item[0];

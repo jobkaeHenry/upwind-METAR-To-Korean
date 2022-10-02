@@ -21,5 +21,5 @@ export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
   bgcolor: "dimgray",
-  metarCloud : [{quantity: 'FEW', height: 1800, type: undefined},{quantity: 'SCT', height: 3000, type: undefined},{quantity: 'BKN', height: 9500, type: undefined}]
+  metarCloud : [{quantity: 'FEW', height: 1800, type: undefined},{quantity: 'SCT', height: 3000, type: undefined},{quantity: 'BKN', height: 25000, type: undefined}]
 };
