@@ -27,7 +27,7 @@ export const MainPage = () => {
 
   // console.log(defaultMetar);
 
-  const API_KEY = process.env.REACT_APP_API_KEY;
+  // const API_KEY = process.env.REACT_APP_API_KEY;
   const [rawMetar, setRawMetar] = useState("");
   const [parsedMetar, setParsedMetar] = useState(defaultMetar);
   const [ICAO, setICAO] = useState("RKSI");
