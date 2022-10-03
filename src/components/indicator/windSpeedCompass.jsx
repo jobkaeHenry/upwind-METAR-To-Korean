@@ -38,7 +38,7 @@ const CompassNiddle = styled.img`
 
 export const WindSpeedCompass = ({ speed, gust, bgcolor }) => {
   return (
-    <CompassContainer bgcolor={bgcolor}>
+    <CompassContainer bgcolor={bgcolor} title={gust?`평균 풍속 ${speed}Kt, 최고 ${gust}Kt 의 돌풍`:`${speed}Kt`}>
       <CompassNiddle className={gust||speed>=55?"vibrate":null} src={colorCalc(speed, gust)} degree={speed<=55?speed*3.6 : 55*3.6}/>
       <CompassBody src={body}></CompassBody>
     </CompassContainer>

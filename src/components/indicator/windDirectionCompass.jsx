@@ -5,7 +5,7 @@ import body from "../../img/direction_compass_body(rotate).png";
 
 export const CompassContainer = styled.div`
   width: 100%;
-  max-width: 400px;
+  max-width: 350px;
   min-width: 160px;
   background-color: ${(props) => props.bgcolor || "none"};
   overflow: hidden;
@@ -47,8 +47,8 @@ export const CompassBody = styled.img`
 
 export const WindDirectionCompass = ({ degree, variable, bgcolor }) => {
   return (
-    <CompassContainer bgcolor={bgcolor}>
-      <CompassNiddle className={variable?"variable":null} src={niddle} degree={degree+180} />
+    <CompassContainer bgcolor={bgcolor} title={variable.min?`${variable.min}°~${variable.max}°`:`${degree}°`}>
+      <CompassNiddle className={variable.min?"variable":null} src={niddle} degree={degree+180} />
       <CompassBody src={body}></CompassBody>
     </CompassContainer>
   );

@@ -23,8 +23,7 @@ const randomCloud = () => {
 const CloudWrap = styled.div`
   width: 100%;
   min-width: 300px;
-  max-width: 50vw;
-  height: 100%;
+  max-width: 400px;
   background-color: ${(props) => (props.bgcolor ? props.bgcolor : "none")};
   padding: 10px;
   display: flex;
@@ -38,6 +37,7 @@ const CloudTable = styled.div`
   width: 100%;
   height: 100%;
   min-height: 300px;
+  max-height: 100%;
   border-width: 0px 0px 1px 1px;
   border-style: solid;
   border-color: white;

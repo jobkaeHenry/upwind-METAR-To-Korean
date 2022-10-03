@@ -32,7 +32,7 @@ export const MainPage = () => {
   const [parsedMetar, setParsedMetar] = useState(defaultMetar);
   const [ICAO, setICAO] = useState("RKSI");
   const [airportName, setAirportName] = useState("");
-  // console.log(parsedMetar);
+  console.log(parsedMetar);
 
   useEffect(() => {
     
@@ -49,6 +49,7 @@ export const MainPage = () => {
         setParsedMetar(parseMetar(response.metarMsg.replace(`METAR `, "").replace("NCD","NSC")));
         setICAO(response.icaoCode);
       }).catch((err)=>{console.log(err)});
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ICAO]);
 
@@ -65,7 +66,7 @@ export const MainPage = () => {
 {/* 구름그래프 */}
             <CloudGraph metarCloud={parsedMetar.clouds}/>
 {/* 콤파스 */}
-            <WindDirectionCompass degree={parsedMetar.wind.degrees} variable={parsedMetar.wind.minVariation} />
+            <WindDirectionCompass degree={parsedMetar.wind.degrees} variable={{min:parsedMetar.wind.minVariation,max:parsedMetar.wind.maxVariation}} />
             <WindSpeedCompass
               speed={parsedMetar.wind.speed}
               gust={parsedMetar.wind.gust}
