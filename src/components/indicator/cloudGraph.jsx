@@ -113,7 +113,7 @@ const CloudRow = ({ height, quantity, maxHeight }) => {
 };
 
 const cloudsGenerator = (metarCloud, maxHeight) => {
-  if (metarCloud.length === 0 || metarCloud[0].quantity === "NSC") {
+  if (metarCloud.length === 0 || metarCloud[0]?.quantity === "NSC") {
     return <NoCloud className="white">구름이 없습니다</NoCloud>;
   } else {
     return metarCloud.map((e,i) => {
@@ -131,7 +131,7 @@ const cloudsGenerator = (metarCloud, maxHeight) => {
 
 export const CloudGraph = ({ metarCloud, bgcolor }) => {
   let maxHeight = 10000;
-  if (metarCloud !== [] && metarCloud[0].height !== undefined) {
+  if (metarCloud !== [] && metarCloud[0]?.height !== undefined) {
     if(metarCloud[metarCloud.length - 1].height>maxHeight)
     {maxHeight = metarCloud[metarCloud.length - 1].height;}
   }
