@@ -4,5 +4,5 @@
 # Demo
 https://upwind.netlify.app
 
-#Storybook
+# Storybook
 https://upwind-storybook.netlify.app
