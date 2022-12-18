@@ -21,26 +21,35 @@ const CompassNiddle = styled.img`
   transform: rotate(${(props) => props.degree || "0"}deg);
   z-index: 4;
   transition-duration: 300ms;
-
-  &.vibrate{
-    @keyframes gustAnim {
-
+  animation: none;
+  @keyframes gustAnim {
     0% {
-      transform: rotate(${(props) => props.degree+1 || "0"}deg);
+      transform: rotate(${(props) => props.degree + 1 || "0"}deg);
     }
-    50%{
-      transform: rotate(${(props) => props.degree-1 || "0"}deg);
+    50% {
+      transform: rotate(${(props) => props.degree - 1 || "0"}deg);
     }
   }
-  animation: gustAnim 300ms infinite;
+  &.vibrate {
+    animation: gustAnim 300ms infinite;
   }
 `;
 
 export const WindSpeedCompass = ({ speed, gust, bgcolor }) => {
+  console.log(speed * 3.6);
   return (
-    <CompassContainer bgcolor={bgcolor} title={gust?`평균 풍속 ${speed}Kt, 최고 ${gust}Kt 의 돌풍`:`${speed}Kt`}>
-      <CompassNiddle className={gust||speed>=55?"vibrate":null} src={colorCalc(speed, gust)} degree={speed<=55?speed*3.6 : 55*3.6}/>
-      <CompassBody src={body}></CompassBody>
+    <CompassContainer
+      bgcolor={bgcolor}
+      title={
+        gust ? `평균 풍속 ${speed}Kt, 최고 ${gust}Kt 의 돌풍` : `${speed}Kt`
+      }
+    >
+      <CompassNiddle
+        className={gust !== undefined || Number(speed) >= 55 ? "vibrate" : null}
+        src={colorCalc(speed, gust)}
+        degree={Number(speed) < 55 ? Number(speed) * 3.6 : 55 * 3.6}
+      />
+      <CompassBody src={body} />
     </CompassContainer>
   );
 };

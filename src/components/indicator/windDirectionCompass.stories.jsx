@@ -10,7 +10,7 @@ export default {
   argTypes: {
     degree: { control: 'number' },
     bgcolor:{control : "color"},
-    variable : {control:"boolean"}
+    variable : {control:null}
   },
 };
 
@@ -23,10 +23,10 @@ export const VariableWind = Template.bind({});
 Default.args = {
   degree: 120,
   bgcolor:"dimgray",
-  variable:false
+  variable:{}
 };
 VariableWind.args = {
   degree: 120,
   bgcolor:"dimgray",
-  variable:true
+  variable:{min:13,max:16}
 };

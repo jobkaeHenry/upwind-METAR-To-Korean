@@ -24,16 +24,15 @@ export const Dangerous = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
   speed:11,
+  gust:undefined,
   bgcolor:"dimgray"
 };
 Gust.args = {
-
   speed:11,
-  gust:5,
+  gust:3,
   bgcolor:"dimgray"
 };
 Dangerous.args = {
-
   speed:35,
   gust:15,
   bgcolor:"dimgray"

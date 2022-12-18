@@ -14,7 +14,7 @@ export const CompassContainer = styled.div`
   justify-content: center;
   position: relative;
   margin: 16px;
-  opacity: 0.5;
+  opacity: 0.7;
 
 &:hover{
   opacity: 1;

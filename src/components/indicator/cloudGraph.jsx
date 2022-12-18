@@ -23,11 +23,11 @@ const randomCloud = () => {
 const CloudWrap = styled.div`
   width: 100%;
   min-width: 300px;
-  max-width: 400px;
+  max-width: 600px;
   background-color: ${(props) => (props.bgcolor ? props.bgcolor : "none")};
   padding: 10px;
   display: flex;
-  opacity: 0.5;
+  opacity: 0.7;
   &:hover {
     opacity: 1;
   }
