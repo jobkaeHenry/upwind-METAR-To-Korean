@@ -3,3 +3,6 @@
 
 # Demo
 https://upwind.netlify.app
+
+# Storybook
+https://upwind-storybook.netlify.app
